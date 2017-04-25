@@ -1,17 +1,28 @@
 // Set up MySQL connection.
 var mysql = require("mysql");
 
-var connection = mysql.createConnection({
-  // port: 3306,
-  // host: "localhost",
-  // user: "root",
-  // password: "",
-  // database: "hot_restaurant_db"
-  host: process.env.db_host || "localhost",
-  user: process.env.db_user || "root",
-  password: process.env.db_pw || "",
-  database: process.env.db || "hot_restaurant_db"
-});
+if (process.env.JAWSDB_URL) {
+     connection = mysql.createConnection(process.env.JAWSDB_URL);
+} else {
+     connection = mysql.createConnection({
+       host: "localhost",
+       user: "root",
+       password: "",
+       database: "hot_restaurant_db"
+     });
+}
+
+// var connection = mysql.createConnection({
+//   // port: 3306,
+//   // host: "localhost",
+//   // user: "root",
+//   // password: "",
+//   // database: "hot_restaurant_db"
+//   host: process.env.db_host || "localhost",
+//   user: process.env.db_user || "root",
+//   password: process.env.db_pw || "",
+//   database: process.env.db || "hot_restaurant_db"
+// });
 
 // Make connection.
 connection.connect(function(err) {
